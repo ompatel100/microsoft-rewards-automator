@@ -1,0 +1,30 @@
+{
+  "name": "microsoft-rewards-automator",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "microsoft-rewards",
+    "automation",
+    "puppeteer"
+  ],
+  "homepage": "https://github.com/ompatel100/microsoft-rewards-automator#readme",
+  "bugs": {
+    "url": "https://github.com/ompatel100/microsoft-rewards-automator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ompatel100/microsoft-rewards-automator.git"
+  },
+  "license": "MIT",
+  "author": "ompatel100",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "puppeteer": "^24.33.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}
