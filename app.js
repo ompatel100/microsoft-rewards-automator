@@ -5,8 +5,7 @@ puppeteer.use(StealthPlugin());
 
 const EDGE_PATH =
   "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
-const USER_DATA =
-  "C:\\Users\\username\\AppData\\Local\\Microsoft\\Edge\\User Data";
+const USER_DATA = "C:\\EdgeAutomationData";
 const PROFILE_DIR = "Default";
 
 const SEARCH_BOX_SELECTOR = "#sb_form_q";
