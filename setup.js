@@ -1,12 +1,11 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const config = require("./config.json");
 
 puppeteer.use(StealthPlugin());
-
-const EDGE_PATH =
-  "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
-const USER_DATA = "C:\\EdgeAutomationData";
-const PROFILE_DIR = "Default";
 
 console.log("Opening Browser for setup...");
 console.log("Add your Microsoft Account to this profile");
@@ -15,10 +14,10 @@ console.log("Close the browser when finished");
 
 try {
   const browser = await puppeteer.launch({
-    executablePath: EDGE_PATH,
+    executablePath: config.browser.executablePath,
     headless: false,
-    userDataDir: USER_DATA,
-    args: [`--profile-directory=${PROFILE_DIR}`],
+    userDataDir: config.browser.userDataDir,
+    args: [`--profile-directory=${config.browser.profileDir}`],
     defaultViewport: null,
   });
 

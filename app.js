@@ -1,14 +1,9 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
+import { createRequire } from "module";
 
-puppeteer.use(StealthPlugin());
-
-const EDGE_PATH =
-  "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
-const USER_DATA = "C:\\EdgeAutomationData";
-const PROFILE_DIR = "Default";
-
-const SEARCH_BOX_SELECTOR = "#sb_form_q";
+const require = createRequire(import.meta.url);
+const config = require("./config.json");
 
 const queries = [
   "latest tech news",
@@ -45,7 +40,7 @@ const type = async (page, selector, text) => {
   for (const char of text) {
     await page.keyboard.type(char);
 
-    const randomDelay = randomInt(100, 250);
+    const randomDelay = randomInt(config.delays.typeMin, config.delays.typeMax);
 
     if (Math.random() < 0.1) {
       await delay(randomDelay + 200);
@@ -72,14 +67,16 @@ const clear = async (page, selector) => {
   await delay(randomInt(100, 300));
 };
 
+puppeteer.use(StealthPlugin());
+
 let browser;
 
 try {
   browser = await puppeteer.launch({
-    executablePath: EDGE_PATH,
-    headless: false,
-    userDataDir: USER_DATA,
-    args: [`--profile-directory=${PROFILE_DIR}`],
+    executablePath: config.browser.executablePath,
+    headless: config.browser.headless,
+    userDataDir: config.browser.userDataDir,
+    args: [`--profile-directory=${config.browser.profileDir}`],
   });
 
   const page = (await browser.pages())[0];
@@ -87,17 +84,21 @@ try {
   await page.goto("https://www.bing.com");
 
   for (let i = 0; i < queries.length; i++) {
-    await page.waitForSelector(SEARCH_BOX_SELECTOR);
+    const searchBoxSelector = config.selectors.searchBox;
+    await page.waitForSelector(searchBoxSelector);
 
     if (i > 0) {
-      await clear(page, SEARCH_BOX_SELECTOR);
+      await clear(page, searchBoxSelector);
     }
 
-    await type(page, SEARCH_BOX_SELECTOR, queries[i]);
+    await type(page, searchBoxSelector, queries[i]);
 
     await page.keyboard.press("Enter");
 
-    const cooldown = randomInt(10000, 15000);
+    const cooldown = randomInt(
+      config.delays.searchCooldownMin,
+      config.delays.searchCooldownMax
+    );
     await delay(cooldown);
   }
 } catch (err) {

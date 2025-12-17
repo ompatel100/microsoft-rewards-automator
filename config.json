@@ -1,0 +1,17 @@
+{
+  "browser": {
+    "executablePath": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "userDataDir": "C:\\EdgeAutomationData",
+    "profileDir": "Default",
+    "headless": false
+  },
+  "selectors": {
+    "searchBox": "#sb_form_q"
+  },
+  "delays": {
+    "typeMin": 100,
+    "typeMax": 250,
+    "searchCooldownMin": 10000,
+    "searchCooldownMax": 15000
+  }
+}
