@@ -1,32 +1,12 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { createRequire } from "module";
+import { generateQueries } from "./queryGenerator.js";
 
 const require = createRequire(import.meta.url);
 const config = require("./config.json");
 
-const queries = [
-  "latest tech news",
-  "best sci-fi movies of all time",
-  "javascript array methods",
-  "current stock market trends",
-  "noise cancelling headphones",
-  "rdr 2",
-  "quantum physics",
-  "top 10 books to read",
-  "spacex launch schedule",
-  "react js interview questions",
-  "best gaming laptops",
-  "node js tutorial crash course",
-  "tallest building in the world",
-  "ps5 vs xbox",
-  "learn to play guitar beginner",
-  "best documentaries on netflix",
-  "world cup winners list",
-  "how to boil an egg perfectly",
-  "crypto market cap today",
-  "rtx 5090",
-];
+const queries = generateQueries(config.searchCount);
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
