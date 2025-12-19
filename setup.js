@@ -1,9 +1,6 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { createRequire } from "module";
-
-const require = createRequire(import.meta.url);
-const config = require("./config.json");
+import { config } from "./utils";
 
 puppeteer.use(StealthPlugin());
 

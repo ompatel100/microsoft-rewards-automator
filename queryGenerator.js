@@ -1,13 +1,5 @@
 import { COMMON_SEARCHES, CATEGORY_SEARCHES } from "./searchData.js";
-import { createRequire } from "module";
-
-const require = createRequire(import.meta.url);
-const config = require("./config.json");
-
-const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-const getRandomKey = (obj) =>
-  Object.keys(obj)[Math.floor(Math.random() * Object.keys(obj).length)];
+import { config, getRandomItem, getRandomKey } from "./utils.js";
 
 export function generateQueries(count = config.searchCount) {
   const queries = new Set();
