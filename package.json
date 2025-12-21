@@ -20,7 +20,9 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "setup": "node src/setup.js"
   },
   "dependencies": {
     "puppeteer": "^24.33.0",
