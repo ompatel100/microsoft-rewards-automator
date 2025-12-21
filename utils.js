@@ -47,4 +47,44 @@ const clear = async (page, selector) => {
   await delay(randomInt(100, 300));
 };
 
-export { config, delay, randomInt, getRandomItem, getRandomKey, type, clear };
+const getProfile = () => {
+  const args = process.argv.slice(2);
+  let flagIndex = args.indexOf("--profile");
+
+  if (flagIndex === -1) {
+    flagIndex = args.indexOf("-p");
+  }
+
+  if (flagIndex === -1) {
+    console.log(
+      `No profile specified (--profile). Using default config profile: ${
+        config.profiles[config.defaultProfileKey]
+      }`
+    );
+    return config.profiles[config.defaultProfileKey];
+  }
+
+  const key = args[flagIndex + 1];
+
+  if (config.profiles[key]) {
+    return config.profiles[key];
+  }
+
+  console.log(
+    `Profile key '${key}' not found in config. Using default config profile: ${
+      config.profiles[config.defaultProfileKey]
+    }.`
+  );
+  return config.profiles[config.defaultProfileKey];
+};
+
+export {
+  config,
+  delay,
+  randomInt,
+  getRandomItem,
+  getRandomKey,
+  type,
+  clear,
+  getProfile,
+};

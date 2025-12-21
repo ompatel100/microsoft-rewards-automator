@@ -1,9 +1,14 @@
 {
   "searchCount": 20,
+  "defaultProfileKey": "d",
+  "profiles": {
+    "d": "Default",
+    "p1": "Profile 1",
+    "p2": "Profile 2"
+  },
   "browser": {
     "executablePath": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
     "userDataDir": "C:\\EdgeAutomationData",
-    "profileDir": "Default",
     "headless": false
   },
   "selectors": {

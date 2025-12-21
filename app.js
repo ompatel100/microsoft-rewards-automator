@@ -1,7 +1,9 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { generateQueries } from "./queryGenerator.js";
-import { config, delay, randomInt, type, clear } from "./utils.js";
+import { config, delay, randomInt, type, clear, getProfile } from "./utils.js";
+
+const profileDir = getProfile();
 
 const queries = generateQueries(config.searchCount);
 
@@ -14,7 +16,7 @@ try {
     executablePath: config.browser.executablePath,
     headless: config.browser.headless,
     userDataDir: config.browser.userDataDir,
-    args: [`--profile-directory=${config.browser.profileDir}`],
+    args: [`--profile-directory=${profileDir}`],
   });
 
   const page = (await browser.pages())[0];
