@@ -22,7 +22,7 @@ const type = async (page, selector, text) => {
 
     const randomDelay = randomInt(
       config.delays.typing.min,
-      config.delays.typing.min
+      config.delays.typing.max
     );
 
     if (Math.random() < 0.1) {
@@ -50,42 +50,4 @@ const clear = async (page, selector) => {
   await delay(randomInt(100, 300));
 };
 
-const getProfile = () => {
-  const args = process.argv.slice(2);
-  let flagIndex = args.indexOf("--profile");
-
-  if (flagIndex === -1) {
-    flagIndex = args.indexOf("-p");
-  }
-
-  const { profileList, defaultProfileKey } = config.profiles;
-
-  if (flagIndex === -1) {
-    console.log(
-      `No profile specified (--profile). Using default config profile: ${profileList[defaultProfileKey]}`
-    );
-    return profileList[defaultProfileKey];
-  }
-
-  const key = args[flagIndex + 1];
-
-  if (profileList[key]) {
-    return profileList[key];
-  }
-
-  console.log(
-    `Profile key '${key}' not found in config. Using default config profile: ${profileList[defaultProfileKey]}.`
-  );
-  return profileList[defaultProfileKey];
-};
-
-export {
-  config,
-  delay,
-  randomInt,
-  getRandomItem,
-  getRandomKey,
-  type,
-  clear,
-  getProfile,
-};
+export { config, delay, randomInt, getRandomItem, getRandomKey, type, clear };
