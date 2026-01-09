@@ -20,7 +20,10 @@ const type = async (page, selector, text) => {
   for (const char of text) {
     await page.keyboard.type(char);
 
-    const randomDelay = randomInt(config.delays.typeMin, config.delays.typeMax);
+    const randomDelay = randomInt(
+      config.delays.typing.min,
+      config.delays.typing.min
+    );
 
     if (Math.random() < 0.1) {
       await delay(randomDelay + 200);
@@ -55,27 +58,25 @@ const getProfile = () => {
     flagIndex = args.indexOf("-p");
   }
 
+  const { profileList, defaultProfileKey } = config.profiles;
+
   if (flagIndex === -1) {
     console.log(
-      `No profile specified (--profile). Using default config profile: ${
-        config.profiles[config.defaultProfileKey]
-      }`
+      `No profile specified (--profile). Using default config profile: ${profileList[defaultProfileKey]}`
     );
-    return config.profiles[config.defaultProfileKey];
+    return profileList[defaultProfileKey];
   }
 
   const key = args[flagIndex + 1];
 
-  if (config.profiles[key]) {
-    return config.profiles[key];
+  if (profileList[key]) {
+    return profileList[key];
   }
 
   console.log(
-    `Profile key '${key}' not found in config. Using default config profile: ${
-      config.profiles[config.defaultProfileKey]
-    }.`
+    `Profile key '${key}' not found in config. Using default config profile: ${profileList[defaultProfileKey]}.`
   );
-  return config.profiles[config.defaultProfileKey];
+  return profileList[defaultProfileKey];
 };
 
 export {

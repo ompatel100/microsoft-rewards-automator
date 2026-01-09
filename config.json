@@ -1,23 +1,32 @@
 {
-  "searchCount": 20,
-  "defaultProfileKey": "d",
-  "profiles": {
-    "d": "Default",
-    "p1": "Profile 1",
-    "p2": "Profile 2"
-  },
   "browser": {
     "executablePath": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
     "userDataDir": "C:\\EdgeAutomationData",
     "headless": false
   },
-  "selectors": {
-    "searchBox": "#sb_form_q"
+  "search": {
+    "min": 20,
+    "max": 20
+  },
+  "profiles": {
+    "defaultProfileKey": "d",
+    "profileList": {
+      "d": "Default",
+      "p1": "Profile 1",
+      "p2": "Profile 2"
+    }
   },
   "delays": {
-    "typeMin": 100,
-    "typeMax": 250,
-    "searchCooldownMin": 10000,
-    "searchCooldownMax": 15000
+    "typing": {
+      "min": 100,
+      "max": 250
+    },
+    "cooldown": {
+      "min": 10000,
+      "max": 15000
+    }
+  },
+  "selectors": {
+    "searchBox": "#sb_form_q"
   }
 }

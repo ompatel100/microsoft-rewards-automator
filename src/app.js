@@ -5,7 +5,9 @@ import { config, delay, randomInt, type, clear, getProfile } from "./utils.js";
 
 const profileDir = getProfile();
 
-const queries = generateQueries(config.searchCount);
+const queries = generateQueries(
+  randomInt(config.search.min, config.search.max)
+);
 
 puppeteer.use(StealthPlugin());
 
@@ -36,8 +38,8 @@ try {
     await page.keyboard.press("Enter");
 
     const cooldown = randomInt(
-      config.delays.searchCooldownMin,
-      config.delays.searchCooldownMax
+      config.delays.cooldown.min,
+      config.delays.cooldown.max
     );
     await delay(cooldown);
   }

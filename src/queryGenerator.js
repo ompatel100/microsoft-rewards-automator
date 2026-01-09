@@ -1,7 +1,7 @@
 import { COMMON_SEARCHES, CATEGORY_SEARCHES } from "./searchData.js";
-import { config, getRandomItem, getRandomKey } from "./utils.js";
+import { getRandomItem, getRandomKey } from "./utils.js";
 
-export function generateQueries(count = config.searchCount) {
+export function generateQueries(count) {
   const queries = new Set();
 
   let loop = 0;
