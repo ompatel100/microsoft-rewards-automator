@@ -1,8 +1,9 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { config, getProfile } from "./utils.js";
+import { config } from "./utils.js";
 
-const profileDir = getProfile();
+const profileDir =
+  config.profiles.profileList[config.profiles.defaultProfileKey];
 
 puppeteer.use(StealthPlugin());
 
