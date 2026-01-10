@@ -97,7 +97,7 @@ npm run setup
 ### Configuration for Profiles
 
 ```json
-"profiles": {
+"profileList": {
   "d": "Default",
   "p1": "Profile 1",
   "p2": "Profile 2"
@@ -124,18 +124,23 @@ npm run setup
 ### Search Count
 
 ```json
-"searchCount": 20
+"search": {
+    "min": 20,
+    "max": 20
+}
 ```
 
-Configure the no of searches you want to make.
+The number of searches the script makes is a random number between these `min` and `max` values. If you want a definite number of searches then keep that same number for both
 
 ---
 
 ### Search Cooldown (⚠️Very Important)
 
 ```json
-"searchCooldownMin": 10000,
-"searchCooldownMax": 15000
+"cooldown": {
+      "min": 10000,
+      "max": 15000
+}
 ```
 
 - Minimum, Maximum time (in milliseconds) to wait after a search completes.
@@ -159,8 +164,10 @@ Configure the no of searches you want to make.
 ### Typing Speed
 
 ```json
-"typeMin": 100,
-"typeMax": 250
+"typing": {
+      "min": 100,
+      "max": 250
+}
 ```
 
 - Minimum, Maximum time (in milliseconds) for typing speed.
@@ -170,22 +177,89 @@ Configure the no of searches you want to make.
 
 ## Usage
 
-### Run the Bot
-
 You can run the bot for your default profile or provide flag for the profile you want to run.
 
-**Run Default Profile:**
+### Run Default Profile
 
 ```bash
 npm start
 ```
 
-**Run Specific Profile using `--profile` or `-p` flag:**
+### Run Specific Profile (`--profile` or `-p`)
 
 Example: Profile 2
 
+> "p2": "Profile 2"
+
+Provide `p2` for running `Profile 2`
+
 ```bash
 npm start -- --profile p2
+```
+
+### Override config by CLI
+
+**Normally the script runs as defined in `config.json`. However, if you want you can override the configurations by these flags for one time runs or creating multiple batch files.**
+
+### Search Count
+
+#### Random count (`--min` and `--max`)
+
+```bash
+npm start -- --min 15 --max 20
+```
+
+#### Definite count (`--count` or `-c`)
+
+```bash
+npm start -- --count 18
+```
+
+### Headless Mode (`--headless` or `-H`)
+
+```bash
+npm start -- --headless
+```
+
+### Headed Mode (`--no-headless`)
+
+```bash
+npm start -- --no-headless
+```
+
+### Help (`--help` or `-h`)
+
+```bash
+npm start -- --help
+```
+
+```
+Usage: microsoft-rewards-automator [options]
+
+A Microsoft Rewards automation tool for Edge featuring stealth, dynamic query generation,
+multiple profile support and extensive configuration.
+
+Options:
+  -p, --profile <key>   profile key in config
+  -c, --count <number>  search count
+  --min <number>        minimum random searches
+  --max <number>        maximum random searches
+  -H, --headless        headless mode
+  --no-headless         headed mode
+  -h, --help            display help for command
+```
+
+---
+
+## Scheduling
+
+If you want to schedule the script, create a `.bat` file. Replace the path and the run command according to your needs. You can schedule it using **Task Scheduler**.
+
+```batch
+@echo off
+cd /d "C:\Path\To\Folder"
+call npm start -- --profile p2
+pause
 ```
 
 ---
